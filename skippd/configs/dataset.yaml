@@ -1,0 +1,7 @@
+datamodule:
+  _target_: skippd_datamodule.MySKIPPDDataModule
+  root: "/p/project/data/skippd"
+  task: "nowcast"
+  batch_size: 64
+  num_workers: 12
+  download: True

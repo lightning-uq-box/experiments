@@ -1,0 +1,15 @@
+experiment:
+  experiment_name: "cyclone"
+  exp_dir: "/p/project/experiment_output/my_experiment_directory/"
+wandb:
+  project: digital_typhoon
+  entity: my_entity
+  mode: offline
+
+trainer:
+  _target_: lightning.pytorch.Trainer
+  accelerator: gpu
+  min_epochs: 20
+  max_epochs: 30
+  log_every_n_steps: 50
+  enable_progress_bar: True

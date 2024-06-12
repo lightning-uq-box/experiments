@@ -1,0 +1,10 @@
+datamodule:
+  _target_: digital_typhoon_dm.MyDigitalTyphoonAnalysisDataModule
+  root: "/p/project/data/tropical_cyclone"
+  task: "classification"
+  batch_size: 128
+  num_workers: 12
+  class_bin_size: 5
+  min_feature_value:
+    wind: 34
+  download: True
