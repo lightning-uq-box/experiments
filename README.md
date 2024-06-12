@@ -11,6 +11,7 @@ conda activate myEnvName
 
 pip install git+https://github.com/microsoft/torchgeo.git
 pip install git+https://github.com/lightning-uq-box/lightning-uq-box.git
+pip install pip install huggingface-hub
 ```
 
 We also use WandB for experiment logging.
@@ -34,7 +35,7 @@ The contain a `run_script.py` which will execute and experiment and store evalua
 
 To run experiments on your machine, you need to make the following changes:
 
-In `dataset.yaml` files, adapt the `root` argument to your preferred local directory. Dataset will automatically be downloaded when running the script for the first time.
+In `dataset.yaml` files, adapt the `root` argument to your preferred local directory. Dataset download instructions are given in each respective directory.
 ```yaml
 datamodule:
   root: "Change the root directory to one where data should be downloaded to"
