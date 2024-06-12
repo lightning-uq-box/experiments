@@ -26,7 +26,13 @@ The experiments for each dataset can be found in their respective directory:
 - [Digital Typhoon](./digital_typhoon/)
 - [SKIPPD](./skippd/)
 
-The contain a `run_script.py` which will execute and experiment and store evaluated results for all datasplits. Experiments are configured based on yaml files that are stored in a `configs` subdiretory of each dataset experiment directory. To run experiments on your machine, you need to make the following changes:
+The contain a `run_script.py` which will execute and experiment and store evaluated results for all datasplits. Experiments are configured based on yaml files that are stored in a `configs` subdiretory of each dataset experiment directory. We have three "types" of config files:
+
+- `dataset.yaml` configuration specific to the dataset and datamodule
+- `trainer.yaml` configuration of experiment naming and Lightning Trainer
+- `model_name.yaml` configuration of specific hyperparameters to a model
+
+To run experiments on your machine, you need to make the following changes:
 
 In `dataset.yaml` files, adapt the `root` argument to your preferred local directory. Dataset will automatically be downloaded when running the script for the first time.
 ```yaml
@@ -45,3 +51,15 @@ wandb: # configure wandb here
   entity: "name of user or entity"
   mode: "mode to run wandb in"
 ```
+
+## Analysis of Experiments
+
+Analysis of experiments was conducted via jupyter notebooks. They expect an experiment directory holding different model runs and will scrape over them to collect all experiment outputs so that they are available for whatevery analysis one might desire.
+
+To run the notebooks with the above environmennt, you also need to install:
+
+```code
+pip install ipykernel
+pip install ipywidgets
+```
+
