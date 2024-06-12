@@ -1,5 +1,15 @@
 # Experiments with Lightning-UQ-Box
 
+## Clone Repo
+
+To run experiments on your machine, clone this repo with
+
+```code
+git clone https://github.com/lightning-uq-box/uq-box-experiments.git
+cd uq-box-experiments
+```
+
+Then proceed to install required packages and navigate the directories to run experiments as outlined below.
 
 ## Installation
 
