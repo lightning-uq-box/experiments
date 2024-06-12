@@ -178,10 +178,6 @@ if __name__ == "__main__":
         model.pred_file_name = "preds_test.csv"
         trainer.test(ckpt_path="best", datamodule=datamodule)
 
-    # store predictions for training and test set
-    # target_mean = datamodule.target_mean
-    # target_std = datamodule.target_std
-
     # train dataset results
     model.pred_file_name = "preds_train.csv"
     datamodule.setup("fit")
