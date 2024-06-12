@@ -24,10 +24,10 @@ from torch import Tensor
 
 from torchgeo.datasets.geo import NonGeoDataset
 from torchgeo.datasets.utils import (
-    DatasetNotFoundError,
     download_url,
     percentile_normalization,
 )
+from torchgeo.datasets.errors import DatasetNotFoundError
 
 
 class _SampleSequenceDict(TypedDict):

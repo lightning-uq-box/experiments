@@ -1,6 +1,6 @@
 datamodule:
-  _target_: skippd_datamodule.MySKIPPDDataModule
-  root: "/p/project/data/skippd"
+  _target_: skippd_dm.MySKIPPDDataModule
+  root: "uq-box-experiments/data/skippd"
   task: "nowcast"
   batch_size: 64
   num_workers: 12

@@ -17,6 +17,8 @@ from lightning.pytorch.loggers import CSVLogger, WandbLogger  # noqa: F401
 from omegaconf import OmegaConf
 from skippd_model import SkippdModel
 
+from skippd_dm import MySKIPPDDataModule
+
 
 def create_experiment_dir(config: dict[str, Any]) -> str:
     """Create experiment directory.

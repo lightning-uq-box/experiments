@@ -1,9 +1,9 @@
 experiment:
   experiment_name: "skippd"
-  exp_dir: "/p/project/experiment_output/my_experiment_directory/"
+  exp_dir: "uq-box-experiments/my_experiments"
 wandb:
   project: skippd
-  entity: entity
+  entity: nilsleh
   mode: offline
 
 trainer:
@@ -13,6 +13,3 @@ trainer:
   max_epochs: 30
   log_every_n_steps: 50
   enable_progress_bar: True
-
-imagenet_ckpt: /p/project/data/resnet18.ckpt
-# imagenet_ckpt: /p/project/data/efficientnet_b0.ckpt

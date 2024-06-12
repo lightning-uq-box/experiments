@@ -266,8 +266,6 @@ class TropicalCycloneSequenceDataModule(NonGeoDataModule):
 
     input_mean = torch.Tensor([0.28154722, 0.28071895, 0.27990073])
     input_std = torch.Tensor([0.23435517, 0.23392765, 0.23351675])
-    # target_mean = torch.Tensor([50.54925])
-    # target_std = torch.Tensor([26.836512])
 
     valid_tasks = ["regression", "classification"]
 

@@ -1,9 +1,8 @@
 datamodule:
   _target_: tropical_cyclone_dm.TropicalCycloneSequenceDataModule
-  root: "/p/project/data/tropical_cyclone"
+  root: "data"
   task: "classification"
   batch_size: 128
   num_workers: 12
   class_bin_size: 5
-  download: True
   

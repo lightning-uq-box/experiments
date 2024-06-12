@@ -1,6 +1,6 @@
 experiment:
   experiment_name: "cyclone"
-  exp_dir: "/p/project/experiment_output/my_experiment_directory/"
+  exp_dir: "/my_experiment_directory/"
 wandb:
   project: digital_typhoon
   entity: my_entity

@@ -15,6 +15,7 @@ from torchvision.transforms import Resize
 from omegaconf.errors import ConfigAttributeError
 from lightning.pytorch.loggers import CSVLogger, WandbLogger  # noqa: F401
 from omegaconf import OmegaConf
+from digital_typhoon_dm import MyDigitalTyphoonAnalysisDataModule
 
 
 def create_experiment_dir(config: dict[str, Any]) -> str:
