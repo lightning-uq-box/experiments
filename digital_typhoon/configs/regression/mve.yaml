@@ -1,0 +1,12 @@
+uq_method:
+  _target_: lightning_uq_box.uq_methods.MVERegression
+  model:
+    _target_: timm.create_model
+    model_name: resnet18
+    in_chans: 3
+    num_classes: 2
+  burnin_epochs: 0
+  optimizer:
+    _target_: torch.optim.Adam # can change optimizers here easily
+    _partial_: true
+    lr: 0.001
