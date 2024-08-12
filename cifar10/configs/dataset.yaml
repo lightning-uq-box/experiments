@@ -1,0 +1,5 @@
+datamodule:
+  _target_: datamodule.CIFAR10DataModule
+  root: "/p/project/hai_uqmethodbox/nils/projects/experiments/cifar10/data"
+  batch_size: 128
+  num_workers: 8
