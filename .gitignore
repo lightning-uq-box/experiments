@@ -3,6 +3,12 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Ignore everything in /data and its subdirectories
+**/data/
+**/launch_scripts/
+**/slurm_err/
+**/slurm_out/
+
 # C extensions
 *.so
 

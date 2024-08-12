@@ -1,0 +1,12 @@
+uq_method:
+  _target_: lightning_uq_box.uq_methods.DKLClassification
+  feature_extractor:
+    _target_: lenet.LeNet
+    num_classes: 16 # num latent features
+  n_inducing_points: 100
+  gp_kernel: "RBF"
+  num_classes: 10 # cifar10 has 10 classes
+  optimizer:
+    _target_: torch.optim.Adam # can change optimizers here easily
+    _partial_: true
+    lr: 0.0001

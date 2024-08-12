@@ -1,0 +1,14 @@
+experiment:
+  experiment_name: "mnist"
+  exp_dir: "/p/project/hai_uqmethodbox/experiment_output/mnist"
+wandb:
+  project: mnist
+  entity: nilsleh
+  mode: offline
+
+trainer:
+  _target_: lightning.pytorch.Trainer
+  accelerator: gpu
+  max_epochs: 1
+  log_every_n_steps: 50
+  enable_progress_bar: True
