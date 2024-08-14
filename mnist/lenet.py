@@ -12,7 +12,7 @@ class LeNet(nn.Module):
 
     def __init__(self, num_classes=10):
         """Initialize LeNet.
-        
+
         Args:
             num_classes: Number of classes. Default is 10 for MNIST.
         """
@@ -30,7 +30,7 @@ class LeNet(nn.Module):
             torch.nn.ReLU(),
             torch.nn.Linear(120, 84),
             torch.nn.ReLU(),
-            torch.nn.Linear(84, num_classes)
+            torch.nn.Linear(84, num_classes),
         )
 
     def forward(self, x: Tensor) -> Tensor:

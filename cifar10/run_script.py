@@ -61,7 +61,7 @@ def generate_trainer(config: dict[str, Any]) -> Trainer:
     checkpoint_callback = ModelCheckpoint(
         dirpath=config["experiment"]["save_dir"],
         save_top_k=1,
-        monitor="train_loss", # cifar10 does not have val_loss
+        monitor="train_loss",  # cifar10 does not have val_loss
         mode=mode,
         every_n_epochs=1,
     )
@@ -106,7 +106,6 @@ if __name__ == "__main__":
 
     datamodule = instantiate(full_config.datamodule)
 
- 
     trainer = generate_trainer(full_config)
 
     if any(method in full_config.uq_method._target_ for method in post_hoc_methods):
@@ -128,7 +127,7 @@ if __name__ == "__main__":
                 for path in full_config.uq_method.ensemble_members
             ]
             model = instantiate(
-                full_config.uq_method, ensemble_members=ewilson_schedulernsemble_members
+                full_config.uq_method, ensemble_members=ensemble_members
             )
         elif (
             "ConformalQR" in full_config.uq_method["_target_"]

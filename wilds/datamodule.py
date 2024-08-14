@@ -1,4 +1,3 @@
-
 from lightning import LightningDataModule
 from wilds import get_dataset
 
@@ -6,11 +5,12 @@ import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
 import torch
 
+
 def collate_to_dict(batch):
     """Collate function to return a dictionary."""
     # Unpack list of tuples
     x, y, metadata = zip(*batch)
-    
+
     # Stack the lists into tensors
     x = torch.stack(x)
     y = torch.stack(y)
@@ -18,21 +18,20 @@ def collate_to_dict(batch):
 
     # Split metadata into single columns
     meta_1, meta_2, meta_3, meta_4 = torch.unbind(metadata, dim=1)
-    
+
     new_batch = {
         "input": x,
         "target": y,
         "meta_1": meta_1,
         "meta_2": meta_2,
         "meta_3": meta_3,
-        "meta_4": meta_4
+        "meta_4": meta_4,
     }
     return new_batch
 
+
 class WILDSPovertyDataModule(LightningDataModule):
-
     """Wilds Poverty DataModule."""
-
 
     def __init__(self, root: str, batch_size: int, num_workers: int):
         super().__init__()
@@ -41,7 +40,6 @@ class WILDSPovertyDataModule(LightningDataModule):
         self.num_workers = num_workers
 
     def setup(self, stage=None):
-
         # https://github.com/Feuermagier/Beyond_Deep_Ensembles/blob/b805d6f9de0bd2e6139237827497a2cb387de11c/experiments/base/wilds1.py#L17
         transform = transforms.Compose(
             [
@@ -49,7 +47,7 @@ class WILDSPovertyDataModule(LightningDataModule):
                 # Images are already normalized tensors
             ]
         )
-        
+
         dataset = get_dataset(dataset="poverty", root_dir=self.root)
 
         self.train_dataset = dataset.get_subset("train")
@@ -59,20 +57,43 @@ class WILDSPovertyDataModule(LightningDataModule):
 
     def train_dataloader(self) -> DataLoader:
         """Get Train Dataloader."""
-        return DataLoader(self.train_dataset, batch_size=self.batch_size, num_workers=self.num_workers, collate_fn=collate_to_dict, shuffle=True)
+        return DataLoader(
+            self.train_dataset,
+            batch_size=self.batch_size,
+            num_workers=self.num_workers,
+            collate_fn=collate_to_dict,
+            shuffle=True,
+        )
 
     def val_dataloader(self) -> DataLoader:
         """Get Validation Dataloader."""
-        return DataLoader(self.val_dataset, batch_size=self.batch_size, num_workers=self.num_workers, collate_fn=collate_to_dict, shuffle=False)
+        return DataLoader(
+            self.val_dataset,
+            batch_size=self.batch_size,
+            num_workers=self.num_workers,
+            collate_fn=collate_to_dict,
+            shuffle=False,
+        )
 
     def test_dataloader(self) -> DataLoader:
         """Get Test Dataloader."""
-        return DataLoader(self.ood_test_dataset, batch_size=self.batch_size, num_workers=self.num_workers, collate_fn=collate_to_dict, shuffle=False)
+        return DataLoader(
+            self.ood_test_dataset,
+            batch_size=self.batch_size * 4,
+            num_workers=self.num_workers,
+            collate_fn=collate_to_dict,
+            shuffle=False,
+        )
 
     def iid_test_dataloader(self) -> DataLoader:
         """Get IID Test Dataloader."""
-        return DataLoader(self.iid_test_dataset, batch_size=self.batch_size, num_workers=self.num_workers, collate_fn=collate_to_dict, shuffle=False)
-
+        return DataLoader(
+            self.iid_test_dataset,
+            batch_size=self.batch_size * 4,
+            num_workers=self.num_workers,
+            collate_fn=collate_to_dict,
+            shuffle=False,
+        )
 
 
 # dm = WILDSPovertyDataModule(root="/p/project/hai_uqmethodbox/nils/projects/experiments/wilds/data/data", batch_size=32, num_workers=0)
@@ -93,6 +114,3 @@ class WILDSPovertyDataModule(LightningDataModule):
 # pdb.set_trace()
 
 # print(0)
-
-
-    

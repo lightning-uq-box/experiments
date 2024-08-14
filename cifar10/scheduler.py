@@ -1,5 +1,6 @@
 import torch
 
+
 def wilson_scheduler(optimizer, pretrain_epochs, lr_init, swag_lr=None):
     def wilson_schedule(epoch):
         t = (epoch) / pretrain_epochs
@@ -11,4 +12,5 @@ def wilson_scheduler(optimizer, pretrain_epochs, lr_init, swag_lr=None):
         else:
             factor = lr_ratio
         return factor
+
     return torch.optim.lr_scheduler.LambdaLR(optimizer, wilson_schedule)

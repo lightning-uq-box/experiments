@@ -105,7 +105,6 @@ if __name__ == "__main__":
 
     datamodule = instantiate(full_config.datamodule)
 
- 
     trainer = generate_trainer(full_config)
 
     if any(method in full_config.uq_method._target_ for method in post_hoc_methods):
@@ -118,6 +117,7 @@ if __name__ == "__main__":
             trainer.fit(model, datamodule=datamodule)
         elif "Laplace" in full_config.uq_method["_target_"]:
             model = instantiate(full_config.uq_method)
+            trainer.test(model, datamodule)
         elif "DeepEnsemble" in full_config.uq_method["_target_"]:
             ensemble_members = [
                 {
@@ -127,7 +127,7 @@ if __name__ == "__main__":
                 for path in full_config.uq_method.ensemble_members
             ]
             model = instantiate(
-                full_config.uq_method, ensemble_members=ewilson_schedulernsemble_members
+                full_config.uq_method, ensemble_members=ensemble_members
             )
         elif (
             "ConformalQR" in full_config.uq_method["_target_"]
@@ -159,6 +159,16 @@ if __name__ == "__main__":
     for angle in [0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180]:
         model.pred_file_name = f"preds_ood_{angle}.csv"
         ood_loader = datamodule.rotated_dataloader(angle=angle)
+        ood_loader.shuffle = False
+        try:
+            trainer.test(ckpt_path="best", dataloaders=ood_loader)
+        except:
+            trainer.test(model, dataloaders=ood_loader)
+
+    # evaluate on FMNIST, EMNIST, KMNIST
+    for ood_dataset in ["FMNIST", "EMNIST", "KMNIST"]:
+        model.pred_file_name = f"preds_ood_{ood_dataset}.csv"
+        ood_loader = datamodule.ood_dataloader(ood_dataset)
         ood_loader.shuffle = False
         try:
             trainer.test(ckpt_path="best", dataloaders=ood_loader)

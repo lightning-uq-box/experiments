@@ -106,20 +106,15 @@ class CIFAR10C(VisionDataset):
             target_transform=target_transform,
         )
         if subset not in ["all", *self.cifarc_subsets]:
-            raise ValueError(
-                f"The subset '{subset}' does not exist in CIFAR-C."
-            )
+            raise ValueError(f"The subset '{subset}' does not exist in CIFAR-C.")
         self.subset = subset
         self.severity = severity
 
         if severity not in list(range(1, 6)):
             raise ValueError(
-                "Corruptions severity should be chosen between 1 and 5 "
-                "included."
+                "Corruptions severity should be chosen between 1 and 5 " "included."
             )
-        samples, labels = self.make_dataset(
-            self.root, self.subset, self.severity
-        )
+        samples, labels = self.make_dataset(self.root, self.subset, self.severity)
 
         self.samples = samples
         self.labels = labels.astype(np.int64)
