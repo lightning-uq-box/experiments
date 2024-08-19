@@ -1,0 +1,27 @@
+uq_method:
+  _target_: lightning_uq_box.uq_methods.SWAGRegression
+  model:
+    _target_: lightning_uq_box.uq_methods.utils.checkpoint_loader
+    model_class:
+      _target_: lightning_uq_box.uq_methods.DeterministicRegression
+      model:
+        _target_: timm.create_model
+        model_name: resnet18
+        in_chans: 8
+        num_classes: 1
+      loss_fn:
+        _target_: torch.nn.MSELoss
+    ckpt_path: /p/project/hai_uqmethodbox/experiment_output/wilds_poverty_ultimate/poverty_DeterministicRegression_08-15-2024_17-05-27-776339/epoch=97-step=15092.ckpt
+    return_model: True
+
+  max_swag_snapshots: 50
+  snapshot_freq: 20
+  num_mc_samples: 10
+  swag_lr: 0.003
+  loss_fn:
+    _target_: torch.nn.MSELoss
+
+trainer:
+  _target_: lightning.pytorch.Trainer
+  min_epochs: 1
+  max_epochs: 10 # number of swag epochs

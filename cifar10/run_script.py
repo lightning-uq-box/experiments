@@ -148,17 +148,6 @@ if __name__ == "__main__":
         model.pred_file_name = "preds_iid_test.csv"
         trainer.test(ckpt_path="best", datamodule=datamodule)
 
-    # train dataset results
-    model.pred_file_name = "preds_train.csv"
-    datamodule.setup("fit")
-    train_loader = datamodule.train_dataloader()
-    train_loader.shuffle = False
-
-    try:
-        trainer.test(ckpt_path="best", dataloaders=train_loader)
-    except:
-        trainer.test(model, dataloaders=train_loader)
-
     # corrupted evaluation
     for severity in range(1, 6):
         model.pred_file_name = f"preds_ood_{severity}.csv"

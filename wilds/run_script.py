@@ -17,6 +17,7 @@ from lightning.pytorch.loggers import CSVLogger, WandbLogger  # noqa: F401
 from omegaconf import OmegaConf
 from datamodule import WILDSPovertyDataModule
 from resnet import ResNet18
+from lightning.pytorch.profilers import SimpleProfiler
 
 def create_experiment_dir(config: dict[str, Any]) -> str:
     """Create experiment directory.
@@ -59,12 +60,14 @@ def generate_trainer(config: dict[str, Any]) -> Trainer:
     checkpoint_callback = ModelCheckpoint(
         dirpath=config["experiment"]["save_dir"],
         save_top_k=1,
-        monitor="train_loss",
+        monitor="train_loss",  # https://github.com/Feuermagier/Beyond_Deep_Ensembles/blob/b805d6f9de0bd2e6139237827497a2cb387de11c/experiments/poverty/poverty.py#L152 model is just saved 
         mode=mode,
         every_n_epochs=1,
     )
 
     lr_monitor_callback = LearningRateMonitor(logging_interval="step")
+
+    profiler = SimpleProfiler(dirpath=config["experiment"]["save_dir"], filename="profiler")
 
     if "SWAG" in config.uq_method["_target_"]:
         callbacks = None
@@ -76,6 +79,7 @@ def generate_trainer(config: dict[str, Any]) -> Trainer:
         default_root_dir=config["experiment"]["save_dir"],
         callbacks=callbacks,
         logger=loggers,
+        profiler=profiler,
     )
 
 
@@ -146,16 +150,6 @@ if __name__ == "__main__":
         model.pred_file_name = "preds_ood_test.csv"
         trainer.test(ckpt_path="best", datamodule=datamodule)
 
-    # train dataset results
-    model.pred_file_name = "preds_train.csv"
-    datamodule.setup("fit")
-    train_loader = datamodule.train_dataloader()
-    train_loader.shuffle = False
-
-    try:
-        trainer.test(ckpt_path="best", dataloaders=train_loader)
-    except:
-        trainer.test(model, dataloaders=train_loader)
 
     # val dataset results
     model.pred_file_name = "preds_val.csv"

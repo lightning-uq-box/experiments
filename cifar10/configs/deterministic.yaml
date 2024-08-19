@@ -2,15 +2,15 @@ uq_method:
   _target_: lightning_uq_box.uq_methods.DeterministicClassification
   model:
     _target_: resnet.ResNet20
-    dropout_p: 0.1
+  loss_fn:
+    _target_: torch.nn.CrossEntropyLoss
   optimizer:
     _target_: torch.optim.SGD
     _partial_: True
     lr: 0.05
     momentum: 0.9
     nesterov: True
-  loss_fn:
-    _target_: torch.nn.CrossEntropyLoss
+    weight_decay: 0.0003
   lr_scheduler:
     _target_: scheduler.wilson_scheduler
     _partial_: True

@@ -11,6 +11,7 @@ uq_method:
     lr: 0.05
     momentum: 0.9
     nesterov: True
+    weight_decay: 0.0003
   lr_scheduler:
     _target_: scheduler.wilson_scheduler
     _partial_: True

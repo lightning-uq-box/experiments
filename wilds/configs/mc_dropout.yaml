@@ -1,15 +1,21 @@
 uq_method:
   _target_: lightning_uq_box.uq_methods.MCDropoutRegression
   model:
-    _target_: timm.create_model
-    model_name: resnet18
-    in_chans: 8
-    num_classes: 2
-    drop_rate: 0.1
-  loss_fn: 
-    _target_: lightning_uq_box.uq_methods.NLL
+    _target_: resnet.ResNet18
+    dropout_p: 0.1
+    # _target_: timm.create_model
+    # model_name: resnet18
+    # in_chans: 8
+    # num_classes: 1
+    # dropout_p: 0.1
+  loss_fn:
+    _target_: torch.nn.MSELoss
   optimizer:
     _target_: torch.optim.Adam
     _partial_: True
-    lr: 0.003
-  num_mc_samples: 30
+    lr: 0.001
+  num_mc_samples: 10
+  lr_scheduler:
+    _target_: torch.optim.lr_scheduler.ExponentialLR
+    _partial_: true
+    gamma: 0.96

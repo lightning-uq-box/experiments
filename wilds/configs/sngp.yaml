@@ -1,12 +1,17 @@
 uq_method:
   _target_: lightning_uq_box.uq_methods.SNGPRegression
   feature_extractor:
-    _target_: timm.create_model
-    model_name: resnet18
-    in_chans: 8
-    num_classes: 8 # feature space dimension
-    drop_rate: 0.1
+    _target_: resnet.ResNet18
+    classes: 128 # feature space dimension
   num_targets: 1
   loss_fn:
     _target_: torch.nn.MSELoss
   input_size: 224
+  optimizer:
+    _target_: torch.optim.Adam
+    _partial_: True
+    lr: 0.001
+  lr_scheduler:
+    _target_: torch.optim.lr_scheduler.ExponentialLR
+    _partial_: true
+    gamma: 0.96

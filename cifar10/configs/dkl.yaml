@@ -8,11 +8,11 @@ uq_method:
   gp_kernel: "RBF"
   num_classes: 10 # cifar10 has 10 classes
   optimizer:
-    _target_: torch.optim.SGD # can change optimizers here easily
+    _target_: torch.optim.Adam # can change optimizers here easily
     _partial_: true
-    lr: 0.05
-  lr_scheduler:
-    _target_: scheduler.wilson_scheduler
-    _partial_: True
-    pretrain_epochs: 300 # needs to match with trainer
-    lr_init: 0.05
+    lr: 0.0001
+  # lr_scheduler:
+  #   _target_: scheduler.wilson_scheduler
+  #   _partial_: True
+  #   pretrain_epochs: 300 # needs to match with trainer
+  #   lr_init: 0.0001

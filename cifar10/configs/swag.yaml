@@ -1,0 +1,24 @@
+uq_method:
+  _target_: lightning_uq_box.uq_methods.SWAGClassification
+  model:
+    _target_: lightning_uq_box.uq_methods.utils.checkpoint_loader
+    model_class:
+      _target_: lightning_uq_box.uq_methods.DeterministicClassification
+      model:
+        _target_: resnet.ResNet20
+      loss_fn:
+        _target_: torch.nn.CrossEntropyLoss
+    ckpt_path: /p/project/hai_uqmethodbox/experiment_output/cifar10-softmax-first/cifar10_DeterministicClassification_08-15-2024_21-53-10-424258/epoch=283-step=111044.ckpt
+    return_model: True
+
+  max_swag_snapshots: 30
+  snapshot_freq: 30
+  num_mc_samples: 50
+  swag_lr: 0.0005
+  loss_fn:
+    _target_: torch.nn.CrossEntropyLoss
+
+trainer:
+  _target_: lightning.pytorch.Trainer
+  min_epochs: 1
+  max_epochs: 10 # number of swag epochs

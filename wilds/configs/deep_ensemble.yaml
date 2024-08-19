@@ -1,0 +1,16 @@
+ensemble_members:
+  _target_: lightning_uq_box.uq_methods.DeterministicRegression
+  model:
+    _target_: resnet.ResNet18
+  loss_fn:
+    _target_: torch.nn.MSELoss
+
+uq_method:
+  _target_: lightning_uq_box.uq_methods.DeepEnsembleRegression
+  ensemble_members:
+  - /p/project/hai_uqmethodbox/experiment_output/wilds_poverty_ultimate/poverty_DeterministicRegression_08-15-2024_17-03-31-812019/epoch=65-step=10164.ckpt
+  - /p/project/hai_uqmethodbox/experiment_output/wilds_poverty_ultimate/poverty_DeterministicRegression_08-15-2024_17-05-27-774161/epoch=85-step=13244.ckpt
+  - /p/project/hai_uqmethodbox/experiment_output/wilds_poverty_ultimate/poverty_DeterministicRegression_08-15-2024_17-05-27-774676/epoch=82-step=12782.ckpt
+  - /p/project/hai_uqmethodbox/experiment_output/wilds_poverty_ultimate/poverty_DeterministicRegression_08-15-2024_17-05-27-776086/epoch=97-step=15092.ckpt
+  - /p/project/hai_uqmethodbox/experiment_output/wilds_poverty_ultimate/poverty_DeterministicRegression_08-15-2024_17-05-27-776339/epoch=97-step=15092.ckpt
+  

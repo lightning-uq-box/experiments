@@ -1,14 +1,15 @@
 experiment:
   experiment_name: "poverty"
-  exp_dir: "/p/project/hai_uqmethodbox/experiment_output/wilds_poverty"
+  exp_dir: "/p/project/hai_uqmethodbox/experiment_output/wilds_poverty_runtime"
 wandb:
   project: poverty
-  entity: nilsleh
+  entity: uq-regression
   mode: offline
 
 trainer:
   _target_: lightning.pytorch.Trainer
   accelerator: gpu
-  max_epochs: 100
+  max_epochs: 10
+  profiler: simple
   log_every_n_steps: 50
   enable_progress_bar: True

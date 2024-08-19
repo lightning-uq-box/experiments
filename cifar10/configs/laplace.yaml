@@ -1,0 +1,26 @@
+uq_method:
+  _target_: lightning_uq_box.uq_methods.LaplaceClassification
+  laplace_model:
+    _target_: laplace.Laplace
+    model:
+      _target_: lightning_uq_box.uq_methods.utils.checkpoint_loader
+      model_class:
+        _target_: lightning_uq_box.uq_methods.DeterministicClassification
+        model:
+          _target_: resnet.ResNet20
+        loss_fn:
+          _target_: torch.nn.CrossEntropyLoss
+      ckpt_path: /p/project/hai_uqmethodbox/experiment_output/cifar10-softmax-first/cifar10_DeterministicClassification_08-15-2024_21-53-10-424258/epoch=283-step=111044.ckpt
+      return_model: True
+    likelihood: "classification"
+    prior_precision: 50.0
+    subset_of_weights: "last_layer"
+    hessian_structure: "full"
+  num_samples: 50
+  pred_type: "nn"
+  link_approx: "mc"
+
+
+trainer:
+  _target_: lightning.pytorch.Trainer
+  inference_mode: False

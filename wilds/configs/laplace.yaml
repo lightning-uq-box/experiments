@@ -1,0 +1,30 @@
+uq_method:
+  _target_: lightning_uq_box.uq_methods.LaplaceRegression
+  laplace_model:
+    _target_: laplace.Laplace
+    model:
+      _target_: lightning_uq_box.uq_methods.utils.checkpoint_loader
+      model_class:
+        _target_: lightning_uq_box.uq_methods.DeterministicRegression
+        model:
+          _target_: timm.create_model
+          model_name: resnet18
+          in_chans: 8
+          num_classes: 1
+        loss_fn:
+          _target_: torch.nn.MSELoss
+      ckpt_path: /p/project/hai_uqmethodbox/experiment_output/wilds_poverty_train_final/poverty_DeterministicRegression_08-13-2024_18-50-58-464601/epoch=85-step=13244.ckpt
+      return_model: True
+    likelihood: "regression"
+    sigma_noise: 0.1
+    prior_precision: 10.0
+    subset_of_weights: "last_layer"
+    hessian_structure: "full"
+  tune_prior_precision: True
+  num_samples: 50
+  pred_type: "nn"
+  link_approx: "mc"
+
+trainer:
+  _target_: lightning.pytorch.Trainer
+  inference_mode: False

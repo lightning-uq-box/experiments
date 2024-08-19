@@ -1,0 +1,23 @@
+uq_method:
+  _target_: lightning_uq_box.uq_methods.BNN_VI_ELBO_Regression
+  model:
+    _target_: resnet.ResNet18
+  criterion:
+    _target_: torch.nn.MSELoss
+  num_mc_samples_train: 1
+  num_mc_samples_test: 10
+  prior_mu: 0.0
+  prior_sigma: 1.0
+  posterior_mu_init: 0.0
+  posterior_rho_init: -5.0
+  bayesian_layer_type: "reparameterization"
+  beta: 100
+  burnin_epochs: 0
+  optimizer:
+    _target_: torch.optim.Adam
+    _partial_: True
+    lr: 0.001
+  lr_scheduler:
+    _target_: torch.optim.lr_scheduler.ExponentialLR
+    _partial_: true
+    gamma: 0.96

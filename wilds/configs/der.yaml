@@ -1,0 +1,11 @@
+uq_method:
+  _target_: lightning_uq_box.uq_methods.DER
+  model:
+    _target_: timm.create_model
+    model_name: resnet18
+    in_chans: 8
+    num_classes: 4 # DER outputs
+  optimizer:
+    _target_: torch.optim.Adam
+    _partial_: True
+    lr: 0.003

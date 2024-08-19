@@ -1,0 +1,19 @@
+uq_method:
+  _target_: lightning_uq_box.uq_methods.DeterministicRegression
+  # model:
+  #   _target_: timm.create_model
+  #   model_name: resnet18
+  #   in_chans: 8
+  #   num_classes: 1
+  model:
+    _target_: resnet.ResNet18
+  loss_fn:
+    _target_: torch.nn.MSELoss
+  optimizer:
+    _target_: torch.optim.Adam # can change optimizers here easily
+    _partial_: true
+    lr: 0.001
+  lr_scheduler:
+    _target_: torch.optim.lr_scheduler.ExponentialLR
+    _partial_: true
+    gamma: 0.96
