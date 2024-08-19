@@ -1,5 +1,0 @@
-datamodule:
-  _target_: datamodule.MNISTDataModule
-  root: "/p/project/hai_uqmethodbox/nils/projects/experiments/mnist/data"
-  batch_size: 128
-  num_workers: 8
