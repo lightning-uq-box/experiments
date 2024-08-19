@@ -1,0 +1,5 @@
+datamodule:
+  _target_: datamodule.WILDSPovertyDataModule
+  root: "/p/project/hai_uqmethodbox/projects/experiments/wilds/data/data"
+  batch_size: 64
+  num_workers: 8

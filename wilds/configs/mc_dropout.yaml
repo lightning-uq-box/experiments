@@ -1,0 +1,16 @@
+uq_method:
+  _target_: lightning_uq_box.uq_methods.MCDropoutRegression
+  model:
+    _target_: resnet.ResNet18
+    dropout_p: 0.1
+  loss_fn:
+    _target_: torch.nn.MSELoss
+  optimizer:
+    _target_: torch.optim.Adam
+    _partial_: True
+    lr: 0.001
+  num_mc_samples: 10
+  lr_scheduler:
+    _target_: torch.optim.lr_scheduler.ExponentialLR
+    _partial_: true
+    gamma: 0.96

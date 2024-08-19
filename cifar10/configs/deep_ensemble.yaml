@@ -1,0 +1,17 @@
+ensemble_members:
+  _target_: lightning_uq_box.uq_methods.DeterministicClassification
+  model:
+    _target_: resnet.ResNet20
+  loss_fn:
+    _target_: torch.nn.CrossEntropyLoss
+
+uq_method:
+  _target_: lightning_uq_box.uq_methods.DeepEnsembleClassification
+  num_classes: 10
+  ensemble_members:
+  - /p/project/hai_uqmethodbox/experiment_output/cifar10-softmax-first/cifar10_DeterministicClassification_08-15-2024_21-53-10-424271/epoch=282-step=110653.ckpt
+  - /p/project/hai_uqmethodbox/experiment_output/cifar10-softmax-first/cifar10_DeterministicClassification_08-15-2024_21-53-10-424278/epoch=292-step=114563.ckpt
+  - /p/project/hai_uqmethodbox/experiment_output/cifar10-softmax-first/cifar10_DeterministicClassification_08-15-2024_21-53-10-424283/epoch=276-step=108307.ckpt
+  - /p/project/hai_uqmethodbox/experiment_output/cifar10-softmax-first/cifar10_DeterministicClassification_08-15-2024_21-53-32-102264/epoch=295-step=115736.ckpt
+  - /p/project/hai_uqmethodbox/experiment_output/cifar10-softmax-first/cifar10_DeterministicClassification_08-15-2024_21-53-10-424258/epoch=283-step=111044.ckpt
+  
