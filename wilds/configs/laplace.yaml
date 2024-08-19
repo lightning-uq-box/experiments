@@ -7,10 +7,7 @@ uq_method:
       model_class:
         _target_: lightning_uq_box.uq_methods.DeterministicRegression
         model:
-          _target_: timm.create_model
-          model_name: resnet18
-          in_chans: 8
-          num_classes: 1
+          _target_: resnet.ResNet18
         loss_fn:
           _target_: torch.nn.MSELoss
       ckpt_path: /p/project/hai_uqmethodbox/experiment_output/wilds_poverty_train_final/poverty_DeterministicRegression_08-13-2024_18-50-58-464601/epoch=85-step=13244.ckpt

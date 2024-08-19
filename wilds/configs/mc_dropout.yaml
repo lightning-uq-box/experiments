@@ -3,11 +3,6 @@ uq_method:
   model:
     _target_: resnet.ResNet18
     dropout_p: 0.1
-    # _target_: timm.create_model
-    # model_name: resnet18
-    # in_chans: 8
-    # num_classes: 1
-    # dropout_p: 0.1
   loss_fn:
     _target_: torch.nn.MSELoss
   optimizer:
